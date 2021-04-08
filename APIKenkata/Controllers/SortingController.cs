@@ -1,4 +1,5 @@
 ﻿using APIKenkata.Data;
+using APIKenkata.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -69,6 +70,29 @@ namespace APIKenkata.Controllers
                 quarable = quarable.Where(q => q.Price <= maxprice);
                 return new OkObjectResult(await quarable.ToListAsync());
 
+        }
+
+        
+
+        [HttpGet("/Newest")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetNewestProducts()
+        {
+            var newList =  _context.Products.OrderByDescending(x => x.Id).ToList();
+            return newList; 
+        }
+
+        [HttpGet("/Cheapest")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetCheapestProducts()
+        {
+            var newList = _context.Products.OrderBy(x => x.Price).ToList();
+            return newList;
+        }
+
+        [HttpGet("/Expensive")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetExpensiveProducts()
+        {
+            var newList = _context.Products.OrderByDescending(x => x.Price).ToList();
+            return newList;
         }
 
 
