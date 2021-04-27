@@ -20,58 +20,12 @@ namespace APIKenkata.Controllers
         {
             _context = context;
         }
-
-        //GET: api/Products
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return await _context.Products/*Include(p => p.Brand).Include(p => p.Category).Include(p => p.Colour).Include(p => p.Size)*/.ToListAsync();
+            return await _context.Products.ToListAsync();
         }
-
-
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
-        //{
-        //    return await _context.Products/*.Include(p => p.BrandModel).Include(p => p.SizeModel)*/.ToListAsync();
-        //}
-
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
-        //{
-        //    var products = new List<Product>();
-
-        //    foreach (var product in await _context.Products.Include(p => p.Category).Include(p=>p.Brand).Include(p => p.Colour).Include(p => p.Size).ToListAsync())
-        //    {
-        //        var category = _context.Categorys.FirstOrDefault(category => category.Id == product.CategoryId);
-        //        var size = _context.Sizes.FirstOrDefault(size => size.Id == product.SizeId);
-        //        var colour = _context.Colours.FirstOrDefault(colour => colour.Id == product.ColourId);
-        //        var brand = _context.Brands.FirstOrDefault(brand => brand.Id == product.BrandId);
-        //        products.Add(new Product
-        //        {
-        //            Id = product.Id,
-        //            ProductName = product.ProductName,
-        //            ShortDescription = product.ShortDescription,
-        //            LongDescription = product.LongDescription,
-        //            StockCount = product.StockCount,
-        //            Price = product.Price,
-        //            OldPrize = product.OldPrize,
-        //            Picture = product.Picture,
-        //            CategoryId = product.CategoryId,
-        //            ColourId = product.ColourId,
-        //            BrandId = product.BrandId,
-        //            SizeId = product.SizeId,
-        //            Category = category,
-        //            Colour = colour,
-        //            Size = size,
-        //            Brand = brand
-
-        //        });
-
-        //    }
-        //    return products;
-        //}
-
-
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
@@ -91,24 +45,6 @@ namespace APIKenkata.Controllers
             product.Colour = colour;
             return product;
         }
-
-
-        //GET: api/Products/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Product>> GetProduct(int id)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
-
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return product;
-        //}
-
-
-
        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
